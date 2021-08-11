@@ -9,7 +9,7 @@
 
 电路连接设计：
 
-![image-20210811114523792](C:\Users\Zz\AppData\Roaming\Typora\typora-user-images\image-20210811114523792.png)
+![](https://github.com/zhuzhengming/wtr_diy_joystick/picture/image-20210811114523792.png)
 
-![image-20210811114542407](C:\Users\Zz\AppData\Roaming\Typora\typora-user-images\image-20210811114542407.png)
+![](https://github.com/zhuzhengming/wtr_diy_joystick/picture/image-20210811114542407.png)
 
