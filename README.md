@@ -9,7 +9,7 @@
 
 电路连接设计：
 
-![](https://github.com/zhuzhengming/wtr_diy_joystick/picture/image-20210811114523792.png)
+![](https://github.com/zhuzhengming/wtr_diy_joystick/blob/main/picture/image-20210811114523792.png)
 
-![](https://github.com/zhuzhengming/wtr_diy_joystick/picture/image-20210811114542407.png)
+![](https://github.com/zhuzhengming/wtr_diy_joystick/blob/main/picture/image-20210811114542407.png)
 
