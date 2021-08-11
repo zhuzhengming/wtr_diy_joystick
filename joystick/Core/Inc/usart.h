@@ -35,12 +35,16 @@ extern UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN Private defines */
 #define HEAD_LENGTH 2
+#define ADD_LENGTH 2
+#define CHANNEL_LENGTH 1
 #define PAYLOAD_LENGTH 17
-#define BAG_LENGTH (HEAD_LENGTH + PAYLOAD_LENGTH)
+#define BAG_LENGTH (HEAD_LENGTH + PAYLOAD_LENGTH + ADD_LENGTH + CHANNEL_LENGTH)
 
 typedef union {
-	uint8_t raw[HEAD_LENGTH + PAYLOAD_LENGTH];
+	uint8_t raw[BAG_LENGTH];
 	struct {
+    uint8_t ADD[ADD_LENGTH];
+    uint8_t CHAN[CHANNEL_LENGTH];
 		uint8_t head[HEAD_LENGTH];
 		union {
 			uint8_t payload[PAYLOAD_LENGTH];

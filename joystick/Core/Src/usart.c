@@ -27,6 +27,9 @@ void start_init(void){
 
   sendbag.head[0] = 0xff;
   sendbag.head[1] = 0x55;
+  sendbag.ADD[0] = 0x00;
+  sendbag.ADD[1] = 0x01;
+  sendbag.CHAN[0] = 0x14;
 }
 
 void code(void){

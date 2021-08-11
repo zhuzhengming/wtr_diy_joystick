@@ -173,7 +173,7 @@
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>sendbag,0x0A</ItemText>
+          <ItemText>sendbag,0x10</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
