@@ -37,7 +37,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define frequency 10
+#define frequency 100
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/

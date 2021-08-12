@@ -21,9 +21,9 @@
 #include "gpio.h"
 
 /* USER CODE BEGIN 0 */
-uint8_t key_row = 0xFF; //保存按键行扫描情况的状�?�数�????
-uint8_t key_num = 0;   //1-16对应的按�????
-uint8_t key_row_num = 0; //行扫描结�????
+uint8_t key_row = 0xFF; //保存按键行扫描情况的状�?�数�????
+uint8_t key_num = 0;   //1-16对应的按�????
+uint8_t key_row_num = 0; //行扫描结�????
 /* USER CODE END 0 */
 
 /*----------------------------------------------------------------------------*/
@@ -81,7 +81,7 @@ void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 2 */
 uint8_t key_row_scan(void){
-  //行扫�????
+  //行扫�????
  
   key_row = HAL_GPIO_ReadPin(key_row_1_GPIO_Port,key_row_1_Pin)<<3;
   key_row = key_row | (HAL_GPIO_ReadPin(key_row_2_GPIO_Port,key_row_2_Pin)<<2);
@@ -95,13 +95,13 @@ uint8_t key_row_scan(void){
     {
       switch(key_row)
       {
-        case 0x07:      //0111 第一行按�????
+        case 0x07:      //0111 第一行按�????
           return 1;
-        case 0x0b:      //1011 第二行按�????
+        case 0x0b:      //1011 第二行按�????
           return 2;
-        case 0x0d:      //1101 第三行按�????
+        case 0x0d:      //1101 第三行按�????
           return 3;
-        case 0x0e:      //1110 第四行按�????
+        case 0x0e:      //1110 第四行按�????
           return 4;
 				
         default : return 0;
