@@ -22,12 +22,15 @@
 #include "adc.h"
 #include "dma.h"
 #include "spi.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "ST7735.h"
+#include "my_serial.h"
+#include "app.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -37,7 +40,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define frequency 100
+// #define frequency 100
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -48,10 +51,10 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint32_t JOY_VALUE[4];
-float JOY_ADC_VALUE[4];
-uint8_t key;
-int a=0;
+// uint32_t JOY_VALUE[4];
+// float JOY_ADC_VALUE[4];
+// uint8_t key;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,16 +65,16 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void joy_decode(void){
-            if(JOY_VALUE[0] <= 2950)  JOY_ADC_VALUE[0] = (float)(JOY_VALUE[0]) / 5900;
-      else   JOY_ADC_VALUE[0] = ((float)JOY_VALUE[0] - 2950) / (1146*2)+0.5;
-            if(JOY_VALUE[1] <= 2950)  JOY_ADC_VALUE[1] = (float)(JOY_VALUE[1]) / 5900;
-      else   JOY_ADC_VALUE[1] = ((float)JOY_VALUE[1] - 2950) / (1146*2)+0.5;
-            if(JOY_VALUE[2] <= 2950)  JOY_ADC_VALUE[2] = (float)(JOY_VALUE[2]) / 5900;
-      else   JOY_ADC_VALUE[2] = ((float)JOY_VALUE[2] - 2950) / (1146*2)+0.5;
-            if(JOY_VALUE[3] <= 2950)  JOY_ADC_VALUE[3] = (float)(JOY_VALUE[3]) / 5900;
-      else   JOY_ADC_VALUE[3] = ((float)JOY_VALUE[3] - 2950) / (1146*2)+0.5;
-}
+// void joy_decode(void){
+//             if(JOY_VALUE[0] <= 2950)  JOY_ADC_VALUE[0] = (float)(JOY_VALUE[0]) / 5900;
+//       else   JOY_ADC_VALUE[0] = ((float)JOY_VALUE[0] - 2950) / (1146*2)+0.5;
+//             if(JOY_VALUE[1] <= 2950)  JOY_ADC_VALUE[1] = (float)(JOY_VALUE[1]) / 5900;
+//       else   JOY_ADC_VALUE[1] = ((float)JOY_VALUE[1] - 2950) / (1146*2)+0.5;
+//             if(JOY_VALUE[2] <= 2950)  JOY_ADC_VALUE[2] = (float)(JOY_VALUE[2]) / 5900;
+//       else   JOY_ADC_VALUE[2] = ((float)JOY_VALUE[2] - 2950) / (1146*2)+0.5;
+//             if(JOY_VALUE[3] <= 2950)  JOY_ADC_VALUE[3] = (float)(JOY_VALUE[3]) / 5900;
+//       else   JOY_ADC_VALUE[3] = ((float)JOY_VALUE[3] - 2950) / (1146*2)+0.5;
+// }
 
 /* USER CODE END 0 */
 
@@ -98,7 +101,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+ 
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -107,9 +110,12 @@ int main(void)
   MX_USART1_UART_Init();
   MX_ADC1_Init();
   MX_SPI2_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim2);
  start_init();
- HAL_ADC_Start_DMA(&hadc1, JOY_VALUE, 4);
+ 
+//  HAL_ADC_Start_DMA(&hadc1, JOY_VALUE, 4);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -119,19 +125,30 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-static int count1 = 1000/frequency;
-if(count1--<0)
-{
-  code();
-  if(HAL_UART_Transmit_DMA(&huart1,(uint8_t*)sendbag.raw,BAG_LENGTH)==HAL_OK) a++;  
-  count1 = 1000/frequency;
-}
+// static int cnt = 1000/frequency;
+
+// if(cnt--<0)
+// {
+//   code();
+
+//   if(HAL_UART_Transmit_DMA(&huart1,(uint8_t*)sendbag.raw,BAG_LENGTH)==HAL_OK) flag++;
+
+//   else  {
+//     Error_Handler();  
+//   }
+
+//   cnt = 1000/frequency;
+// }
+      
       
         //摇杆读取处理
        joy_decode();
 
         //矩阵键盘读取处理
         key = key_scan();
+
+        //显示�?
+        display();
 
         HAL_Delay(1);
   }

@@ -37,8 +37,7 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-extern float JOY_ADC_VALUE[4];
-extern uint8_t key;
+
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/

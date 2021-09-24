@@ -21,9 +21,7 @@
 #include "gpio.h"
 
 /* USER CODE BEGIN 0 */
-uint8_t key_row = 0xFF; //保存按键行扫描情况的状�?�数�????
-uint8_t key_num = 0;   //1-16对应的按�????
-uint8_t key_row_num = 0; //行扫描结�????
+
 /* USER CODE END 0 */
 
 /*----------------------------------------------------------------------------*/
@@ -80,76 +78,6 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 2 */
-uint8_t key_row_scan(void){
-  //行扫�????
- 
-  key_row = HAL_GPIO_ReadPin(key_row_1_GPIO_Port,key_row_1_Pin)<<3;
-  key_row = key_row | (HAL_GPIO_ReadPin(key_row_2_GPIO_Port,key_row_2_Pin)<<2);
-  key_row = key_row | (HAL_GPIO_ReadPin(key_row_3_GPIO_Port,key_row_3_Pin)<<1);
-  key_row = key_row | (HAL_GPIO_ReadPin(key_row_4_GPIO_Port,key_row_4_Pin));
-
-  if(key_row != 0x0f) //判断到有按键按下
-  {
-    HAL_Delay(10);//消抖
-    if(key_row != 0x0f)
-    {
-      switch(key_row)
-      {
-        case 0x07:      //0111 第一行按�????
-          return 1;
-        case 0x0b:      //1011 第二行按�????
-          return 2;
-        case 0x0d:      //1101 第三行按�????
-          return 3;
-        case 0x0e:      //1110 第四行按�????
-          return 4;
-				
-        default : return 0;
-      }
-    }
-    else  return 0;
-
-  }
-  else  return 0;
-}
-
-uint8_t key_scan(void){
-
-
-  KEY_CLO1_OUT_LOW;
-  if((key_row_num = key_row_scan()) != 0)
-  {
-    while(key_row_scan() != 0);//消抖
-    key_num = 1 + 4*(key_row_num-1);
-  }
-  KEY_CLO1_OUT_HIGH;
-
-  KEY_CLO2_OUT_LOW;        
-    if( (key_row_num=key_row_scan()) != 0 )
-    { 
-        while(key_row_scan() != 0);
-        key_num = 2 + 4*(key_row_num-1);
-    }
-  KEY_CLO2_OUT_HIGH;
-
-  KEY_CLO3_OUT_LOW;        
-    if( (key_row_num=key_row_scan()) != 0 )
-    { 
-        while(key_row_scan() != 0);
-        key_num = 3 + 4*(key_row_num-1);
-    }
-  KEY_CLO3_OUT_HIGH;
-
-  KEY_CLO4_OUT_LOW;        
-    if( (key_row_num=key_row_scan()) != 0 )
-    { 
-        while(key_row_scan() != 0);
-        key_num = 4 + 4*(key_row_num-1);
-    }
-  KEY_CLO4_OUT_HIGH;
-
-  return key_num;
-}
 
 /* USER CODE END 2 */
 

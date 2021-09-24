@@ -32,22 +32,12 @@ extern "C" {
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
-#define KEY_CLO1_OUT_LOW  HAL_GPIO_WritePin(key_col_1_GPIO_Port,key_col_1_Pin,GPIO_PIN_RESET) 
-#define KEY_CLO2_OUT_LOW  HAL_GPIO_WritePin(key_col_2_GPIO_Port,key_col_2_Pin,GPIO_PIN_RESET)
-#define KEY_CLO3_OUT_LOW  HAL_GPIO_WritePin(key_col_3_GPIO_Port,key_col_3_Pin,GPIO_PIN_RESET)
-#define KEY_CLO4_OUT_LOW  HAL_GPIO_WritePin(key_col_4_GPIO_Port,key_col_4_Pin,GPIO_PIN_RESET)
 
-#define KEY_CLO1_OUT_HIGH  HAL_GPIO_WritePin(key_col_1_GPIO_Port,key_col_1_Pin,GPIO_PIN_SET) 
-#define KEY_CLO2_OUT_HIGH  HAL_GPIO_WritePin(key_col_2_GPIO_Port,key_col_2_Pin,GPIO_PIN_SET)
-#define KEY_CLO3_OUT_HIGH  HAL_GPIO_WritePin(key_col_3_GPIO_Port,key_col_3_Pin,GPIO_PIN_SET)
-#define KEY_CLO4_OUT_HIGH  HAL_GPIO_WritePin(key_col_4_GPIO_Port,key_col_4_Pin,GPIO_PIN_SET)
 /* USER CODE END Private defines */
 
 void MX_GPIO_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-uint8_t key_scan(void);
-uint8_t key_row_scan(void);
 
 /* USER CODE END Prototypes */
 

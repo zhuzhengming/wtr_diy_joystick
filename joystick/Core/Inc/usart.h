@@ -34,36 +34,13 @@ extern "C" {
 extern UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN Private defines */
-#define HEAD_LENGTH 2
-#define ADD_LENGTH 2
-#define CHANNEL_LENGTH 1
-#define PAYLOAD_LENGTH 17
-#define BAG_LENGTH (HEAD_LENGTH + PAYLOAD_LENGTH + ADD_LENGTH + CHANNEL_LENGTH)
 
-typedef union {
-	uint8_t raw[BAG_LENGTH];
-	struct {
-    uint8_t ADD[ADD_LENGTH];
-    uint8_t CHAN[CHANNEL_LENGTH];
-		uint8_t head[HEAD_LENGTH];
-		union {
-			uint8_t payload[PAYLOAD_LENGTH];
-			struct {
-                float left_joysticks[2];
-                float right_joysticks[2];
-                uint8_t buttons;
-            }__attribute__((packed));
-		};
-	} __attribute__((packed));
-} __attribute__((packed)) SendBag_t;
 /* USER CODE END Private defines */
 
 void MX_USART1_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-void code(void);
-void start_init(void);
-extern SendBag_t sendbag;
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
