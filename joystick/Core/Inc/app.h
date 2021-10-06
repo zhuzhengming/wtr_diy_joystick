@@ -7,7 +7,9 @@
 #include "my_serial.h"
 #include "usart.h"
 #include "tim.h"
-
+#include "cmsis_os.h"
+#include "FreeRTOS.h"
+#include "task.h"
 // #define frequency 500
 
 #define KEY_A 97
@@ -33,7 +35,7 @@ extern uint32_t JOY_VALUE[4];
 extern float JOY_ADC_VALUE[4];
 extern uint8_t key;
 extern uint8_t flag;
-
+extern uint32_t JOY_TEMP_VALUE[120];
 void joy_decode(void);
 uint8_t key_scan(void);
 void display(void);

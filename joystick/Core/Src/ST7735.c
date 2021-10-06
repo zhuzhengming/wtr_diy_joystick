@@ -223,6 +223,8 @@ void LCD_Init(SPI_HandleTypeDef *hspix,uint16_t color){
     LCD_Write_Data8(0x03);
     LCD_Write_Data8(0x03);
     LCD_Write_Data8(0x10);
+    LCD_Write_Reg(0x36);
+    LCD_Write_Data8(0X00);
     //------------------------------------End ST7735S Gamma Sequence-----------------------------------------//
     LCD_Write_Reg(0x3A); //16-bit pixel
     LCD_Write_Data8(0x05);

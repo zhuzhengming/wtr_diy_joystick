@@ -31,19 +31,19 @@ void start_init(void){
   sendbag.CHAN[0] = CHANNEL;
   sendbag.length = BAG_LENGTH;
   sendbag.state = WRROG;
-  sendbag.crc8 = getCrc8((uint8_t*)sendbag.raw,sendbag.length);
-
+  sendbag.crc8 = getCrc8(sendbag.raw,sendbag.length);
+  
     LCD_Init(&hspi2,GREEN);
  HAL_TIM_Base_Start_IT(&htim2);
- HAL_ADC_Start_DMA(&hadc1, JOY_VALUE, 4);
+ HAL_ADC_Start_DMA(&hadc1, JOY_TEMP_VALUE, 120);
 
 }
 
 void code(void){
-  sendbag.left_joysticks[0] = JOY_ADC_VALUE[0];
-  sendbag.left_joysticks[1] = JOY_ADC_VALUE[1];
-  sendbag.right_joysticks[0] = JOY_ADC_VALUE[2];
-  sendbag.right_joysticks[1] = JOY_ADC_VALUE[3];
+  sendbag.left_joysticks[0] = (uint8_t)(JOY_ADC_VALUE[0]*100);
+  sendbag.left_joysticks[1] = (uint8_t)(JOY_ADC_VALUE[1]*100);
+  sendbag.right_joysticks[0] = (uint8_t)(JOY_ADC_VALUE[2]*100);
+  sendbag.right_joysticks[1] = (uint8_t)(JOY_ADC_VALUE[3]*100);
   sendbag.buttons = key;
 }
 /* USER CODE END 0 */

@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceRoot}\\Core\\Inc\\**",
+                "${workspaceRoot}\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\**",
+                "${workspaceRoot}\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy**",
+                "${workspaceRoot}\\Drivers\\CMSIS\\Include\\**",
+                "${workspaceRoot}\\Drivers\\CMSIS\\Device\\ST\\STM32F1XX\\Include**",
+                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F1xx/Include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "E:/ProgramData/mingw64/bin/g++.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "${default}",
+            "forcedInclude": [
+                "E:/ProgramData/mingw64\\lib\\gcc\\x86_64-w64-mingw32\\7.3.0\\include\\stdint-gcc.h"
+            ]
+        }
+    ],
+    "version": 4
+}

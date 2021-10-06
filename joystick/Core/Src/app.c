@@ -1,6 +1,6 @@
 #include "app.h"
-
-
+#include "cmsis_os.h"
+uint32_t JOY_TEMP_VALUE[120];
 uint32_t JOY_VALUE[4];
 float JOY_ADC_VALUE[4];
 uint8_t key;
@@ -13,14 +13,37 @@ uint8_t flag = 0;
 
 
 void joy_decode(void){
-            if(JOY_VALUE[0] <= 2950)  JOY_ADC_VALUE[0] = (float)(JOY_VALUE[0]) / 5900;
-      else   JOY_ADC_VALUE[0] = ((float)JOY_VALUE[0] - 2950) / (1146*2)+0.5;
-            if(JOY_VALUE[1] <= 2950)  JOY_ADC_VALUE[1] = (float)(JOY_VALUE[1]) / 5900;
-      else   JOY_ADC_VALUE[1] = ((float)JOY_VALUE[1] - 2950) / (1146*2)+0.5;
-            if(JOY_VALUE[2] <= 2950)  JOY_ADC_VALUE[2] = (float)(JOY_VALUE[2]) / 5900;
-      else   JOY_ADC_VALUE[2] = ((float)JOY_VALUE[2] - 2950) / (1146*2)+0.5;
-            if(JOY_VALUE[3] <= 2950)  JOY_ADC_VALUE[3] = (float)(JOY_VALUE[3]) / 5900;
-      else   JOY_ADC_VALUE[3] = ((float)JOY_VALUE[3] - 2950) / (1146*2)+0.5;
+  for(int i=0;i<4;i++)
+  {
+    JOY_VALUE[i]=0;
+  }
+  for(int i=0;i<30;i++)
+  {
+    JOY_VALUE[0]+=JOY_TEMP_VALUE[4*i];
+    JOY_VALUE[1]+=JOY_TEMP_VALUE[4*i+1];
+    JOY_VALUE[2]+=JOY_TEMP_VALUE[4*i+2];
+    JOY_VALUE[3]+=JOY_TEMP_VALUE[4*i+3];
+  }
+  for(int i=0;i<4;i++)
+  {
+    JOY_VALUE[i]=JOY_VALUE[i]/30;
+  }
+  if(JOY_VALUE[0] <= 2950)  
+    JOY_ADC_VALUE[0] = (float)(JOY_VALUE[0]) / 5900;
+  else   
+    JOY_ADC_VALUE[0] = ((float)JOY_VALUE[0] - 2950) / (1146*2)+0.5;
+  if(JOY_VALUE[1] <= 2950)  
+    JOY_ADC_VALUE[1] = (float)(JOY_VALUE[1]) / 5900;
+  else   
+    JOY_ADC_VALUE[1] = ((float)JOY_VALUE[1] - 2950) / (1146*2)+0.5;
+  if(JOY_VALUE[2] <= 2950)  
+    JOY_ADC_VALUE[2] = (float)(JOY_VALUE[2]) / 5900;
+  else   
+    JOY_ADC_VALUE[2] = ((float)JOY_VALUE[2] - 2950) / (1146*2)+0.5;
+  if(JOY_VALUE[3] <= 2950)  
+    JOY_ADC_VALUE[3] = (float)(JOY_VALUE[3]) / 5900;
+  else   
+    JOY_ADC_VALUE[3] = ((float)JOY_VALUE[3] - 2950) / (1146*2)+0.5;
 }
 
 uint8_t key_processing(void){
@@ -99,7 +122,7 @@ uint8_t key_row_scan(void){
 
   if(key_row != 0x0f) //判断到有按键按下
   {
-    HAL_Delay(10);//消抖
+    vTaskDelay(10);//消抖
     if(key_row != 0x0f)
     {
       switch(key_row)
@@ -197,17 +220,21 @@ void display(void){
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-  if(htim->Instance == TIM2){
-		
+  if(htim->Instance == TIM2)
+  {
+		code();
+    sendbag.crc8 = getCrc8(sendbag.raw,sendbag.length);
     if(HAL_UART_Transmit_DMA(&huart1,(uint8_t*)sendbag.raw,BAG_LENGTH)==HAL_OK){
       flag++;
       sendbag.state = OK;
     } 
-
-  else  {
+    else  
+    {
     Error_Handler();  
-  }
+    }
 
   }
-
+  if (htim->Instance == TIM4) {
+    HAL_IncTick();
+  }
 }

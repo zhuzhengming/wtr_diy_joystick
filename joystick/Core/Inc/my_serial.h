@@ -19,8 +19,8 @@
 #define HEAD_LENGTH 2
 #define ADD_LENGTH 2
 #define CHANNEL_LENGTH 1
-#define PAYLOAD_LENGTH 17
-#define BAG_LENGTH (HEAD_LENGTH + PAYLOAD_LENGTH + ADD_LENGTH + CHANNEL_LENGTH + 2)
+#define PAYLOAD_LENGTH 5
+#define BAG_LENGTH (HEAD_LENGTH + PAYLOAD_LENGTH + ADD_LENGTH + CHANNEL_LENGTH + 3)
 
 typedef union {
 	uint8_t raw[BAG_LENGTH];
@@ -34,8 +34,8 @@ typedef union {
 		union {
 			uint8_t payload[PAYLOAD_LENGTH];
 			struct {
-                float left_joysticks[2];
-                float right_joysticks[2];
+                uint8_t left_joysticks[2];
+                uint8_t right_joysticks[2];
                 uint8_t buttons;
             }__attribute__((packed));
 		};

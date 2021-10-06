@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "my_serial.h": "c",
+        "main.h": "c",
+        "app.h": "c",
+        "gpio.h": "c",
+        "cmsis_os.h": "c",
+        "usart.h": "c",
+        "freertos.h": "c"
+    }
+}
