@@ -187,7 +187,7 @@ void LCD_Init(SPI_HandleTypeDef *hspix,uint16_t color){
     LCD_Write_Reg(0xC5); //VCOM
     LCD_Write_Data8(0x0a);
     LCD_Write_Reg(0x36); //MX, MY, RGB mode
-    LCD_Write_Data8(0xC0);
+    LCD_Write_Data8(0x00);
     //------------------------------------ST7735S Gamma Sequence-----------------------------------------//
     LCD_Write_Reg(0XE0);
     LCD_Write_Data8(0x12);
